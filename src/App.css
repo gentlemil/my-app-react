@@ -1,0 +1,10 @@
+#root,
+.app {
+    height: 100%;
+}
+
+.app {
+    background-color: #3181F2;
+    margin: 0 auto;
+    width: 500px;
+}
