@@ -16,8 +16,11 @@ const Countdown = props => (
 
 Countdown.propTypes = {
     name: PropTypes.string,
-    hour: PropTypes.string,
-    minute: PropTypes.string,
+    hour: PropTypes.number,
+    minute: PropTypes.number,
+    onEditInit: PropTypes.func,
+    onRemove: PropTypes.func,
+
 }
 
 export default Countdown

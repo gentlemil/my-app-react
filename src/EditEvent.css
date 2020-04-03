@@ -1,0 +1,21 @@
+.edit-event__input-group input {
+    border: 0;
+    padding: 5px;
+    width: 70%;
+}
+
+.edit-event button {
+    background: transparent;
+    border: solid 1px #ffffff;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.4rem;
+    margin: 10px;
+    padding: 5px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.edit-event button:disabled {
+    opacity: 0.4;
+}
