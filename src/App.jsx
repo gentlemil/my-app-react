@@ -10,10 +10,17 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
+            now: {
+                hour: new Date().getHours(),
+                minute: new Date().getMinutes(),
+                seconds: new Date().getSeconds(),
+            },
+
             events: [
                 { id: 0, name: 'sniadanie', hour: 7, minute: 0 },
                 { id: 1, name: 'obiad', hour: 15, minute: 0 },
                 { id: 2, name: 'kolacja', hour: 20, minute: 0 },
+                { id: 3, name: 'bieganie', hour: 23, minute: 0 },
             ],
             editedEvent: {
                 id: uniqid(),
@@ -28,6 +35,25 @@ class App extends Component {
         this.handleEditInit = this.handleEditInit.bind(this)
         this.handleEditCancel = this.handleEditCancel.bind(this)
     }
+
+    timer = () => {
+        this.setState({
+            now: {
+                hour: new Date().getHours(),
+                minute: new Date().getMinutes(),
+                seconds: new Date().getSeconds(),
+            },
+        })
+    }
+
+    componentDidMount() {
+        const intervalId = setInterval(this.timer, 1000)
+        this.setState({ intervalId: intervalId })
+    }
+
+    // componentWillUnmount() {
+    //     clearInterval(this.state.intervalId)
+    // }
 
     handleEditEvent(val) {
         console.log(val)
@@ -114,6 +140,8 @@ class App extends Component {
                 name={el.name}
                 hour={el.hour}
                 minute={el.minute}
+
+                timeNow={this.state.now}
                 onRemove={id => this.handleRemoveEvent(id)}
                 onEditInit={id => this.handleEditInit(id)}
             />
