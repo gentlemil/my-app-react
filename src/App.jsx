@@ -3,6 +3,9 @@ import './App.css'
 
 import Countdown from './Countdown.jsx'
 import EditEvent from './EditEvent'
+import SectionOne from './SectionOne'
+import SectionTwo from './SectionTwo'
+import SectionThree from './SectionThree'
 import uniqid from 'uniqid'
 
 class App extends Component {
@@ -47,6 +50,9 @@ class App extends Component {
     }
 
     componentDidMount() {
+        const storageEvents = JSON.parse(localStorage.getItem('events')) || [];
+        this.setState({ events: storageEvents })
+        console.log(storageEvents)
         const intervalId = setInterval(this.timer, 1000)
         this.setState({ intervalId: intervalId })
     }
@@ -92,7 +98,10 @@ class App extends Component {
                     minute: -1
                 },
             }
-        })
+        },
+            // zapisywanie danych w localStorage
+            () => localStorage.setItem('events', JSON.stringify(this.state.events))
+        )
 
         // alert('bumszakalaka!')
         // this.setState(prevState => ({
@@ -110,7 +119,10 @@ class App extends Component {
     handleRemoveEvent(id) {
         this.setState(prevState => ({
             events: prevState.events.filter(el => el.id !== id)
-        }))
+        }),
+            // zapisywanie, a raczej usuwanie b danych w localStorage
+            () => localStorage.setItem('events', JSON.stringify(this.state.events))
+        )
     }
 
     handleEditInit(id) {
@@ -160,6 +172,9 @@ class App extends Component {
                     onSave={() => this.handleSaveEvent()}
                     onCancel={() => this.handleEditCancel()}
                 />
+                <SectionOne />
+                <SectionTwo />
+                <SectionThree />
             </div>
         )
     }
